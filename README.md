@@ -1,37 +1,52 @@
-## Welcome to GitHub Pages
+### P5738 洛谷题解
+## ->难度：入门
+## 题目直达->[P5738 【深基7.例4】歌唱比赛]（https://www.luogu.com.cn/problem/P5738）
 
-You can use the [editor on GitHub](https://github.com/qianmhyh/qianmhyh.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+###### 第一次写题解，可能有不完善之处，请多多谅解！
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+------------
+### 首先根据题意，有参赛选手 n<=100,评委数 m<=20;
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+#### 所以可以以此构造二维数组**a[105][100]**;并规定为有变量**i,j**。
+#### **i**表示选手编号，即输入顺序;
+#### **j**表示第**j**位评委打分。
+#### 再用sum数组累计每位选手的积分和（去掉max,min）,再求平均数
 
-```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
+------------
 
-- Bulleted
-- List
+# 分析完毕，代码如下：
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
 
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+int n,m;
+int a[105][100],maxn,minn;
+double sum[105],vsum;
+int main()
+{
+	cin>>n>>m;
+	for(int i=1;i<=n;i++)//人数 
+	{
+		maxn=-1;
+		minn=1000;
+		for(int j=1;j<=m;j++)//评委数 
+		{
+			cin>>a[i][j];
+			sum[i]+=a[i][j];
+			maxn=max(maxn,a[i][j]);
+			minn=min(minn,a[i][j]); 
+		}
+		sum[i]-=(maxn+minn);
+		sum[i]=sum[i]/(m-2);
+		if(sum[i]>vsum)
+		{
+			vsum=sum[i];
+		}
+	}
+	cout<<fixed<<setprecision(2)<<vsum;
+	return 0;
+}
 ```
-
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/qianmhyh/qianmhyh.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+###  _完结散花_ 
