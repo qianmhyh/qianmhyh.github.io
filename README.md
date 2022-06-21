@@ -1,7 +1,6 @@
 
-# <font color=red> C++ 代码学习 </font> 
+# <font color=red> C++ </font> 
 
-###[c++ 学习](https://www.luogu.com.cn/blog/qianmh/)
+###[UOJ](http://124.221.137.247/)
 -------------
 
-###### (创立时间->2022)
